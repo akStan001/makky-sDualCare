@@ -192,30 +192,33 @@
             color: #ddd;
         }
 
-        /* Section Headers */
-        .section-header {
+        /* Updated Section Headers */
+        .section-header, .about-title {
             text-align: center;
             font-size: 3rem;
-            margin-bottom: 60px;
+            margin: 0 auto 60px;
             color: #ff4500;
             text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            display: block;
+            width: 100%;
+            padding: 0 20px;
+            word-wrap: break-word;
         }
 
         .section-header::after {
             content: '';
             position: absolute;
             bottom: -15px;
-            left: 0;
-            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 400px;
             height: 3px;
             background: linear-gradient(90deg, transparent, #ff4500, transparent);
         }
 
-        /* About Section - Now in the middle */
+        /* About Section */
         .about-section {
             padding: 100px 20px;
             background: linear-gradient(to bottom, #222, #1a1a1a);
@@ -225,13 +228,6 @@
         .about-container {
             max-width: 1000px;
             margin: 0 auto;
-        }
-
-        .about-title {
-            font-size: 3rem;
-            color: #ff4500;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
         }
 
         .about-text {
@@ -398,6 +394,8 @@
             margin-bottom: 40px;
             color: #ff4500;
             text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+            width: 100%;
+            padding: 0 20px;
         }
 
         .contact-info {
@@ -474,7 +472,14 @@
             }
             
             .section-header, .contact h2, .about-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: 40px;
+                padding: 0 15px;
+            }
+            
+            .section-header::after {
+                width: 70%;
+                bottom: -10px;
             }
 
             nav ul li {
@@ -576,7 +581,7 @@
         </div>
     </section>
 
-    <!-- About Section - Now in the middle -->
+    <!-- About Section -->
     <section class="about-section" id="about">
         <div class="about-container">
             <h2 class="about-title">About Us</h2>
@@ -705,7 +710,6 @@
             <p><i class="fas fa-map-marker-alt"></i> Ilorin, Kwara State , Nigeria</p>
             <div class="social-links">
                 <a href="https://wa.me/2348100761001" target="_blank"><i class="fab fa-whatsapp"></i></a>
-               
             </div>
         </div>
     </section>
