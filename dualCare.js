@@ -71,6 +71,7 @@
             
             window.open('https://www.tiktok.com/@makky_dual_care', '_blank');
         });
+
         document.querySelector('.instagram-container').addEventListener('click', function() {
             
             window.open('https://www.instagram.com/makky_dual_care/', '_blank');
