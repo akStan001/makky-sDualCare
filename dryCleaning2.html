@@ -436,6 +436,29 @@
             text-align: center;
         }
 
+        .whatsapp-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+
+        .whatsapp-link:hover {
+            color: #25D366;
+        }
+
+        .whatsapp-link i {
+            color: #25D366;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-link:hover i {
+            transform: scale(1.1);
+        }
+
         .contact-form {
             opacity: 0;
             transform: translateX(50px);
@@ -842,12 +865,18 @@
                             <span>08119898342</span>
                         </div>
                         <div>
+                            <a href="https://wa.me/2347073857015" target="_blank" class="whatsapp-link">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+2347073857015</span>
+                            </a>
+                        </div>
+                        <div>
                             <i class="fas fa-envelope"></i>
                             <span>makkylaundryhaven@gmail.com</span>
                         </div>
                         <div>
                             <i class="fas fa-clock"></i>
-                            <span>Monday-Saturday: 8:30 am - 7pm |  Sunday: Closed</span>
+                            <span>Monday-Saturday: 8:30 am - 7pm | Sunday: Closed</span>
                         </div>
                     </div>
                     <h3>Follow Us</h3>
