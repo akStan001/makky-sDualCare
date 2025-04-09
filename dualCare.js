@@ -68,8 +68,12 @@
 
         // TikTok handle click event
         document.querySelector('.tiktok-container').addEventListener('click', function() {
-            // Replace with actual TikTok URL
+            
             window.open('https://www.tiktok.com/@makky_dual_care', '_blank');
+        });
+        document.querySelector('.instagram-container').addEventListener('click', function() {
+            
+            window.open('https://www.instagram.com/makky_dual_care/', '_blank');
         });
 
         // Add floating TikTok particles
