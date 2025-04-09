@@ -303,7 +303,7 @@
             z-index: 10;
         }
 
-        .tiktok-container {
+        .tiktok-container, .instagram-container {
             max-width: 300px;
             margin: 0 auto;
             display: flex;
