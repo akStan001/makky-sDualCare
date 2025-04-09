@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZoomWheels - Ultimate Car Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #e74c3c;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e74c3c;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?car') no-repeat center/cover;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            z-index: 1;
+            animation: slideIn 1.5s ease-out;
+        }
+
+        .hero h2 {
+            font-size: 4em;
+            text-transform: uppercase;
+            color: #e74c3c;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .cta-btn {
+            background: #e74c3c;
+            padding: 15px 40px;
+            border: none;
+            color: #fff;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.8);
+        }
+
+        /* Car Listings */
+        .car-listings {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .car-listings h2 {
+            font-size: 3em;
+            margin-bottom: 50px;
+            color: #e74c3c;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .car-card {
+            background: #fff;
+            color: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .car-info {
+            padding: 20px;
+        }
+
+        .car-info h3 {
+            font-size: 1.5em;
+            color: #e74c3c;
+        }
+
+        .car-info p {
+            color: #666;
+        }
+
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2ecc71;
+            margin-top: 10px;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ZoomWheels</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#cars">Cars</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Drive the Future</h2>
+            <p>Find Your Dream Car Today!</p>
+            <button class="cta-btn" onclick="scrollToCars()">Shop Now</button>
+        </div>
+    </section>
+
+    <section class="car-listings" id="cars">
+        <h2>Featured Cars</h2>
+        <div class="car-grid">
+            <div class="car-card">
+                <img src="https://source.unsplash.com/300x200/?sports-car" alt="Sports Car">
+                <div class="car-info">
+                    <h3>Tesla Model S</h3>
+                    <p>Electric power, unmatched speed.</p>
+                    <div class="price">$79,999</div>
+                </div>
+            </div>
+            <div class="car-card">
+                <img src="https://source.unsplash.com/300x200/?luxury-car" alt="Luxury Car">
+                <div class="car-info">
+                    <h3>BMW X7</h3>
+                    <p>Luxury meets performance.</p>
+                    <div class="price">$85,000</div>
+                </div>
+            </div>
+            <div class="car-card">
+                <img src="https://source.unsplash.com/300x200/?classic-car" alt="Classic Car">
+                <div class="car-info">
+                    <h3>Ford Mustang '69</h3>
+                    <p>Timeless classic, pure muscle.</p>
+                    <div class="price">$45,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 ZoomWheels. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function scrollToCars() {
+            document.getElementById('cars').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Add random color flash effect to CTA button
+        const ctaBtn = document.querySelector('.cta-btn');
+        setInterval(() => {
+            ctaBtn.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
+            setTimeout(() => {
+                ctaBtn.style.background = '#e74c3c';
+            }, 200);
+        }, 3000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makky's Laundry Haven</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        section {
+            padding: 80px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        header.scrolled {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: var(--primary);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            z-index: 999;
+        }
+
+        .promo-banner p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .promo-link {
+            color: var(--accent);
+            text-decoration: underline;
+            margin-left: 10px;
+        }
+
+        .promo-link:hover {
+            color: white;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bgImage.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        #hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #hero h1 {
+            color: white;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        #hero p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.2s;
+        }
+
+        #hero .btn {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.4s;
+        }
+
+        #hero.animated h1,
+        #hero.animated p,
+        #hero.animated .btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Services Section */
+        #services {
+            background-color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(74, 111, 165, 0.1), rgba(79, 195, 247, 0.1));
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            top: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(to right, var(--light) 50%, var(--primary) 50%);
+            position: relative;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .about-image {
+            position: relative;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #about.animated .about-text,
+        #about.animated .about-image {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background-color: var(--light);
+        }
+
+        .testimonials-container {
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease;
+        }
+
+        .testimonial-card.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .author-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .contact-info {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-details div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-details i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-form {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        #contact.animated .contact-info,
+        #contact.animated .contact-form {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        /* Floating Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        .floating-btn i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate {
+            opacity: 1;
+            transform: translate(0);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            #about {
+                background: var(--light);
+            }
+
+            .about-image {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 60px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Makky's<span>LaundryHaven</span></a>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        <div class="container">
+            <p><i class="fas fa-star"></i> Special Offer: 20% off your first Residential Cleaning service! <a href="#contact" class="promo-link">Book Now</a></p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Professional Dry Cleaning Services</h1>
+            <p style="font-weight:bold; font-family:Verdana, Geneva, Tahoma, sans-serif;">We provide high-quality dry cleaning and laundry services with quick turnaround times and exceptional customer service. Your clothes deserve the best care.</p>
+            <a href="#contact" class="btn">Schedule a Pickup</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="subtitle" style="text-align: center; max-width: 800px; margin: 0 auto 50px;">We offer a comprehensive range of dry cleaning, laundry, and residential cleaning services to meet all your needs.</p>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in-up">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Dry Cleaning</h3>
+                    <p>Professional dry cleaning for all types of garments using eco-friendly solvents that are gentle on fabrics and the environment.</p>
+                </div>
+                
+                <div class="service-card fade-in-up" style="transition-delay: 0.2s">
+                    <i class="fas fa-shirt"></i>
+                    <h3>Laundry Service</h3>
+                    <p>Wash, dry, and fold service for your everyday laundry needs. We handle everything with care and attention to detail.</p>
+                </div>
+                
+                <div class="service-card fade-in-up" style="transition-delay: 0.4s">
+                    <i class="fas fa-rug"></i>
+                    <h3>Alterations & Repairs</h3>
+                    <p>Expert tailoring and repair services to ensure your clothes fit perfectly and look their best.</p>
+                </div>
+                
+                <div class="service-card fade-in-up" style="transition-delay: 0.6s">
+                    <i class="fas fa-socks"></i>
+                    <h3>Specialty Fabric Care</h3>
+                    <p>Specialized cleaning for delicate fabrics like silk, wool, and leather to preserve their quality and longevity.</p>
+                </div>
+                
+                <div class="service-card fade-in-up" style="transition-delay: 0.8s">
+                    <i class="fas fa-home"></i>
+                    <h3>Home Pickup & Delivery</h3>
+                    <p>Convenient pickup and delivery service to save you time. We come to you on your schedule.</p>
+                </div>
+                
+                <div class="service-card fade-in-up" style="transition-delay: 1s">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Subscription Service</h3>
+                    <p>Regular scheduled cleaning with discounted rates for our subscription members. Perfect for busy professionals.</p>
+                </div>
+                
+                <div class="service-card fade-in-up" style="transition-delay: 1.2s">
+                    <i class="fas fa-broom"></i>
+                    <h3>Residential Cleaning</h3>
+                    <p>Transform your home with our expert residential cleaning services. We bring sparkle to every corner using safe, effective cleaning solutions, leaving your space fresh and spotless.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in-left">
+                    <h2>About Us</h2>
+                    <p>Makky's Laundry Haven has been serving the community since 2023 with a commitment to quality, convenience, and customer satisfaction.</p>
+                    <p>Our team of experienced professionals uses state-of-the-art equipment and eco-friendly cleaning solutions to ensure your garments receive the best possible care.</p>
+                    <p>We understand that your clothes are an investment, and we treat them with the care and attention they deserve. From everyday laundry to delicate specialty items, we've got you covered.</p>
+                    <a href="#services" class="btn">Our Services</a>
+                </div>
+                <div class="about-image fade-in-right">
+                    <img src="shelves.jpeg" alt="Dry cleaning professional at work">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <p class="subtitle" style="text-align: center; max-width: 800px; margin: 0 auto 50px;">Don't just take our word for it - hear from our satisfied customers</p>
+            
+            <div class="testimonials-container">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        <p>"I've been using Makky's Laundry Haven for years and they never disappoint. My clothes always come back looking brand new. Their pickup and delivery service is a lifesaver for my busy schedule."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="me.jpeg" alt="akeem gbolahan">
+                        <div class="author-info">
+                            <h4>Akeem Gbolahan</h4>
+                            <p>Regular Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in" style="transition-delay: 0.2s">
+                    <div class="testimonial-text">
+                        <p>"The team at Makky's Laundry Haven saved my wedding dress after I spilled red wine on it the night before my wedding. They worked miracles and had it ready by morning. Forever grateful!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="thuna.jpeg" alt="adebayo babatunde">
+                        <div class="author-info">
+                            <h4>Adebayo Babatunde</h4>
+                            <p>Wedding Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in" style="transition-delay: 0.4s">
+                    <div class="testimonial-text">
+                        <p>"As a business professional, I need my suits to look impeccable. Makky's Laundry Haven consistently delivers perfect results with quick turnaround times. Highly recommend their service."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="qj.jpeg" alt="salami qudus">
+                        <div class="author-info">
+                            <h4>Salami Qudus</h4>
+                            <p>Business Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p class="subtitle" style="text-align: center; max-width: 800px; margin: 0 auto 50px;">Get in touch to schedule a pickup or learn more about our services</p>
+            
+            <div class="contact-container">
+                <div class="contact-info fade-in-left">
+                    <h3>Visit or Call Us</h3>
+                    <div class="contact-details">
+                        <div>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Alaya street, Beside MFM, Balogun Tanke Oke Odo, Ilorin.</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-phone"></i>
+                            <span>08119898342</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-envelope"></i>
+                            <span>makkylaundryhaven@gmail.com</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-clock"></i>
+                            <span>Monday-Saturday: 8:30 am - 7pm |  Sunday: Closed</span>
+                        </div>
+                    </div>
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/makky_laundry_haven/"><i class="fab fa-instagram"></i><img src="data:image/jpeg;base64,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" style="width:50px;"></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form fade-in-right">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Makky's Laundry Haven</h3>
+                    <p>Providing exceptional dry cleaning and laundry services with a commitment to quality, convenience, and customer satisfaction since 2024.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#hero" style="color: #bbb; text-decoration: none;">Home</a></li>
+                        <li><a href="#services" style="color: #bbb; text-decoration: none;">Services</a></li>
+                        <li><a href="#about" style="color: #bbb; text-decoration: none;">About Us</a></li>
+                        <li><a href="#testimonials" style="color: #bbb; text-decoration: none;">Testimonials</a></li>
+                        <li><a href="#contact" style="color: #bbb; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#" style="color: #bbb; text-decoration: none;">Dry Cleaning</a></li>
+                        <li><a href="#" style="color: #bbb; text-decoration: none;">Laundry Service</a></li>
+                        <li><a href="#" style="color: #bbb; text-decoration: none;">Alterations</a></li>
+                        <li><a href="#" style="color: #bbb; text-decoration: none;">Specialty Fabrics</a></li>
+                        <li><a href="#" style="color: #bbb; text-decoration: none;">Pickup & Delivery</a></li>
+                        <li><a href="#" style="color: #bbb; text-decoration: none;">Residential Cleaning</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Makky's Laundry Haven. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <a href="#contact" class="floating-btn">
+        <i class="fas fa-concierge-bell"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Hero section animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const hero = document.getElementById('hero');
+            setTimeout(() => {
+                hero.classList.add('animated');
+            }, 300);
+        });
+
+        // Scroll animations
+        function checkScroll() {
+            const fadeElements = document.querySelectorAll('.fade-in, .fade-in-up, .fade-in-left, .fade-in-right');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('animate');
+                }
+            });
+
+            // About section animation
+            const aboutSection = document.getElementById('about');
+            const aboutTop = aboutSection.getBoundingClientRect().top;
+            if (aboutTop < window.innerHeight - 100) {
+                aboutSection.classList.add('animated');
+            }
+
+            // Contact section animation
+            const contactSection = document.getElementById('contact');
+            const contactTop = contactSection.getBoundingClientRect().top;
+            if (contactTop < window.innerHeight - 100) {
+                contactSection.classList.add('animated');
+            }
+        }
+
+        // Run on initial load
+        checkScroll();
+
+        // Run on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Form submission with WhatsApp integration
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Validate form
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Prepare WhatsApp message with user's details and service information
+            const whatsappMessage = 
+                `*New Service Inquiry*%0A%0A` +
+                `👤 *Name:* ${encodeURIComponent(name)}%0A` +
+                `📧 *Email:* ${encodeURIComponent(email)}%0A` +
+                `📱 *Phone:* ${phone ? encodeURIComponent(phone) : 'Not provided'}%0A` +
+                `✉️ *Message:* ${encodeURIComponent(message)}%0A%0A` +
+                `Thank you for contacting Makky's Laundry Haven!%0A%0A` +
+                `✅ *Our Services:*%0A` +
+                `✔️ Professional Dry Cleaning%0A` +
+                `✔️ Laundry Service%0A` +
+                `✔️ Specialty Fabric Care%0A` +
+                `✔️ Alterations & Repairs%0A` +
+                `✔️ Home Pickup & Delivery%0A` +
+                `✔️ Residential Cleaning%0A%0A` +
+                `📍 *Location:* Alaya street, Beside MFM, Balogun Tanke Oke Odo, Ilorin%0A` +
+                `📞 *Phone:* 08119898342%0A` +
+                `🕒 *Hours:* Mon-Sat 8:30am -7pm | Sun - Closed!%0A%0A` +
+                `How can we assist you today?`;
+            
+            // Create WhatsApp link with your number
+            const whatsappUrl = `https://wa.me/2347073857015?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappUrl, '_blank');
+            
+            // Show confirmation
+            alert('Thank you! You are being redirected to WhatsApp to complete your request.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #fff;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: bold;
+            color: #00ccff;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(0, 204, 255, 0.8);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links li a:hover {
+            color: #00ccff;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #00ccff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            color: #00ccff;
+            transform: rotate(90deg);
+        }
+
+        /* Main Split Section */
+        .split-container {
+            display: flex;
+            height: 100vh;
+            padding-top: 60px;
+        }
+
+        .split-section {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .split-section:hover {
+            transform: scale(0.98);
+        }
+
+        .dry-cleaning {
+            background: linear-gradient(135deg, #00ccff, #0077b3);
+            color: #fff;
+        }
+
+        .tire-selling {
+            background: linear-gradient(135deg, #ff4500, #1a1a1a);
+            color: #fff;
+        }
+
+        .split-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .split-section:hover h1 {
+            transform: scale(1.05);
+        }
+
+        .split-section p {
+            font-size: 1.2rem;
+            max-width: 80%;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .split-section:hover p {
+            transform: translateY(-5px);
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .dry-cleaning .cta-btn {
+            background: #fff;
+            color: #0077b3;
+        }
+
+        .tire-selling .cta-btn {
+            background: #fff;
+            color: #ff4500;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255,255,255,0.8);
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Sections for navigation */
+        #home {
+            position: absolute;
+            top: 0;
+            height: 0;
+        }
+
+        #services {
+            padding: 80px 20px;
+            background: #f5f5f5;
+            text-align: center;
+        }
+
+        #contact {
+            padding: 80px 20px;
+            background: #333;
+            color: white;
+            text-align: center;
+        }
+
+        .services-container, .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Creative Animations */
+        .bubble {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+        }
+
+        .tire-anim {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            animation: roll 8s infinite linear;
+        }
+
+        .tire-anim img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes roll {
+            0% { transform: translateX(-100%) rotate(0deg); }
+            100% { transform: translateX(100%) rotate(720deg); }
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Icons */
+        .floating-icons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .floating-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #00ccff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floating-icon:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: #ff4500;
+        }
+
+        /* TikTok Handle Section */
+        .tiktok-handle {
+            position: relative;
+            background: #000;
+            padding: 30px 0;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .tiktok-container {
+            max-width: 300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+            padding: 15px 25px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .tiktok-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .tiktok-icon {
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 10px #00f2ea, 0 0 20px #ff0050;
+            animation: tiktok-pulse 2s infinite;
+        }
+
+        .tiktok-text {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .tiktok-text span {
+            font-weight: bold;
+            color: #00f2ea;
+            text-shadow: 0 0 5px rgba(0, 242, 234, 0.5);
+        }
+
+        .tiktok-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%2300f2ea" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23ff0050" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%2300f2ea"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+            z-index: 1;
+            transform: rotate(180deg);
+        }
+
+        .tiktok-particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: tiktok-float linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes tiktok-pulse {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 10px #00f2ea, 0 0 20px #ff0050;
+            }
+            50% {
+                transform: scale(1.1);
+                text-shadow: 0 0 15px #00f2ea, 0 0 30px #ff0050;
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 10px #00f2ea, 0 0 20px #ff0050;
+            }
+        }
+
+        @keyframes tiktok-float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: auto;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 20px;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li a {
+                font-size: 1.3rem;
+                padding: 10px 20px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links li a::after {
+                display: none;
+            }
+
+            .nav-links li a:hover {
+                background: rgba(0, 204, 255, 0.2);
+                border-radius: 10px;
+            }
+
+            .split-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .split-section {
+                width: 100%;
+                height: 50vh;
+            }
+
+            .tiktok-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                border-radius: 20px;
+            }
+            
+            .tiktok-text {
+                font-size: 0.9rem;
+            }
+        }
+    

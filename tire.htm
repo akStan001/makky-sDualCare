@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makky's AutoHub - Premium Auto Parts & More</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(255, 69, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 12px;
+        }
+
+        nav ul li a:hover {
+            color: #ff4500;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.8);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff4500;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.95);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(255, 69, 0, 0.3);
+            z-index: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .dropdown-content a {
+            color: #ddd;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255, 69, 0, 0.2);
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 69, 0, 0.2);
+            color: #ff4500;
+            padding-left: 25px;
+        }
+
+        .nav-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Header with rolling tire animation */
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #2a2a2a, #1a1a1a);
+        }
+
+        .tire-anim {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #000 30%, #444 70%);
+            border-radius: 50%;
+            animation: roll 10s infinite linear;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+
+        .tire-anim::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: repeating-radial-gradient(circle, #555 0, #555 5px, transparent 5px, transparent 10px);
+            opacity: 0.7;
+        }
+
+        @keyframes roll {
+            0% { transform: translateX(-100vw) rotate(0deg) scale(0.8); }
+            50% { transform: translateX(0) rotate(540deg) scale(1); }
+            100% { transform: translateX(100vw) rotate(1080deg) scale(0.8); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 25px;
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 69, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .header-content h1 {
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+            margin-bottom: 25px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 69, 0, 0.5); }
+            to { text-shadow: 0 0 20px #ff4500, 0 0 40px #ff4500, 0 0 60px #ff4500; }
+        }
+
+        .header-content p {
+            font-size: 1.6rem;
+            margin: 25px 0;
+            color: #ddd;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: #ff4500;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff4500, transparent);
+        }
+
+        /* About Section - Now in the middle */
+        .about-section {
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, #222, #1a1a1a);
+            text-align: center;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-title {
+            font-size: 3rem;
+            color: #ff4500;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ddd;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Products Sections */
+        .products-section {
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tires {
+            background: linear-gradient(to bottom, #1a1a1a, #222);
+        }
+
+        .alloy-rims {
+            background: linear-gradient(to bottom, #222, #1a1a1a);
+        }
+
+        .car-accessories {
+            background: linear-gradient(to bottom, #1a1a1a, #222);
+        }
+
+        .lug-nuts {
+            background: linear-gradient(to bottom, #222, #1a1a1a);
+        }
+
+        .tire-tubes {
+            background: linear-gradient(to bottom, #1a1a1a, #222);
+        }
+
+        .engine-oil {
+            background: linear-gradient(to bottom, #222, #1a1a1a);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 69, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            border-color: #ff4500;
+            box-shadow: 0 15px 30px rgba(255, 69, 0, 0.4);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.4s;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .product-card h3 {
+            margin: 20px 0;
+            color: #ff4500;
+            font-size: 1.8rem;
+            text-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+        }
+
+        .product-card p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #ddd;
+            font-style: italic;
+        }
+
+        /* Inquire Buttons */
+        .inquire-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .buy-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(45deg, #128C7E, #25D366);
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .buy-btn i {
+            font-size: 1.5rem;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .buy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.6s;
+            z-index: -1;
+        }
+
+        .buy-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 20px;
+            background: linear-gradient(to top, #1a1a1a, #222);
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #ff4500;
+            text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+        }
+
+        .contact-info {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.3rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 25px;
+            color: #ddd;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 2.5rem;
+            transition: all 0.4s;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .social-links a:hover {
+            color: #ff4500;
+            transform: translateY(-8px) rotate(5deg);
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            padding: 30px;
+            text-align: center;
+            font-size: 1rem;
+            color: #ddd;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4500, #25D366, #ff4500);
+            background-size: 200% 200%;
+            animation: gradientShift 5s infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 3rem;
+            }
+            
+            .header-content p {
+                font-size: 1.3rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header, .contact h2, .about-title {
+                font-size: 2.5rem;
+            }
+
+            nav ul li {
+                margin: 5px 8px;
+            }
+
+            nav ul li a {
+                font-size: 0.85rem;
+                padding: 6px 8px;
+            }
+
+            .dropdown-content {
+                min-width: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#home" onclick="scrollToSection('header')">Home</a></li>
+            <li class="nav-dropdown">
+                <a href="#products">Products <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#tires" onclick="scrollToSection('tires')">Premium Tires</a>
+                    <a href="#rims" onclick="scrollToSection('alloy-rims')">Alloy Rims</a>
+                    <a href="#accessories" onclick="scrollToSection('car-accessories')">Car Accessories</a>
+                    <a href="#lug-nuts" onclick="scrollToSection('lug-nuts')">Lug Nuts</a>
+                    <a href="#tire-tubes" onclick="scrollToSection('tire-tubes')">Tire Tubes</a>
+                    <a href="#engine-oil" onclick="scrollToSection('engine-oil')">Engine Oil</a>
+                </div>
+            </li>
+            <li><a href="#about" onclick="scrollToSection('about')">About</a></li>
+            <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="tire-anim"></div>
+        <div class="header-content">
+            <h1>Makky's AutoHub</h1>
+            <p>Your One-Stop Shop for Premium Auto Parts & More</p>
+        </div>
+    </header>
+
+    <!-- Tires Section -->
+    <section class="products-section tires" id="tires">
+        <h2 class="section-header">Premium Tires</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="imageTire1.jpeg" alt="All-Season Tire">
+                <h3>All-Season Pro</h3>
+                <p>"Ride Smooth, Rain or Shine!"</p>
+            </div>
+            <div class="product-card">
+                <img src="imageTire3.jpeg" alt="Off-Road Tire">
+                <h3>Trail Blazer</h3>
+                <p>"Conquer the Wild with Style!"</p>
+            </div>
+            <div class="product-card">
+                <img src="imageTire2.jpeg" alt="Performance Tire">
+                <h3>Speed King</h3>
+                <p>"Unleash the Beast on Every Turn!"</p>
+            </div>
+        </div>
+        <div class="inquire-container">
+            <button class="buy-btn" onclick="openWhatsApp('tires')">
+                <i class="fab fa-whatsapp"></i> Inquire About Tires
+            </button>
+        </div>
+    </section>
+
+    <!-- Alloy Rims Section -->
+    <section class="products-section alloy-rims" id="alloy-rims">
+        <h2 class="section-header">Alloy Rims</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="rim2.jpeg" alt="Sport Rims">
+                <h3>Sport Chrome</h3>
+                <p>"Shine on the Road with Style!"</p>
+            </div>
+            <div class="product-card">
+                <img src="rim3.jpeg" alt="Off-Road Rims">
+                <h3>Off-Road Beast</h3>
+                <p>"Built Tough for Any Terrain!"</p>
+            </div>
+            <div class="product-card">
+                <img src="rim1.jpeg" alt="Luxury Rims">
+                <h3>Luxury Edition</h3>
+                <p>"Elevate Your Ride's Prestige!"</p>
+            </div>
+        </div>
+        <div class="inquire-container">
+            <button class="buy-btn" onclick="openWhatsApp('alloy rims')">
+                <i class="fab fa-whatsapp"></i> Inquire About Rims
+            </button>
+        </div>
+    </section>
+
+    <!-- About Section - Now in the middle -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <h2 class="about-title">About Us</h2>
+            <div class="about-text">
+                <p>At Makky's AutoHub, we've been providing top-quality auto parts and accessories for over an half decade. Our commitment to excellence and customer satisfaction has made us a trusted name in the industry.</p>
+                <p>We source only the highest quality products from reputable manufacturers worldwide, ensuring your vehicle gets the best components available. Our knowledgeable staff can help you find exactly what you need for any make or model.</p>
+                <p>Whether you're a professional mechanic or a car enthusiast, Makky's AutoHub has everything you need to keep your vehicle running at peak performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Car Accessories Section --> 
+    <section class="products-section car-accessories" id="car-accessories">
+        <h2 class="section-header">Car Accessories</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="carSit1.jpeg" alt="Premium Seat Covers">
+                <h3>Luxury Seat Covers</h3>
+                <p>"Comfort Meets Elegance!"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/41ezo0lGdrL.jpg" alt="Dashboard Covers">
+                <h3>Premium Dash Covers</h3>
+                <p>"Protect and Beautify!"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/71fw5QllpbL.jpg" alt="Steering Wheel Covers">
+                <h3>Sport Steering Covers</h3>
+                <p>"Better Grip, Better Control!"</p>
+            </div>
+        </div>
+        <div class="inquire-container">
+            <button class="buy-btn" onclick="openWhatsApp('car accessories')">
+                <i class="fab fa-whatsapp"></i> Inquire About Accessories
+            </button>
+        </div>
+    </section>
+
+    <!-- Lug Nuts Section -->
+    <section class="products-section lug-nuts" id="lug-nuts">
+        <h2 class="section-header">Lug Nuts</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="tigerNut1.jpeg" alt="Premium Lug Nuts">
+                <h3>Premium Lug Nuts</h3>
+                <p>"Secure Fit for Any Wheel"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://cdn11.bigcommerce.com/s-1gfd17pa/images/stencil/1280x1280/products/821191/1609737/Aftermarket-Wheels-Require-Aftermarket-Lugs-Chrome-or-Black-Lug-Nuts-or-Bolts-Set-for-4-Wheels-LN4W-BB-Wheels_1609736__55944.1706124942.jpg?c=2" alt="Chrome Lug Nuts">
+                <h3>Chrome Finish</h3>
+                <p>"Durable & Stylish Protection"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQno0A-FM40DEvJ7Ri2ccz5BmJxmILuUIA-XQ&s" alt="Locking Lug Nuts">
+                <h3>Locking Lug Nuts</h3>
+                <p>"Enhanced Security for Your Wheels"</p>
+            </div>
+        </div>
+        <div class="inquire-container">
+            <button class="buy-btn" onclick="openWhatsApp('lug nuts')">
+                <i class="fab fa-whatsapp"></i> Inquire About Lug Nuts
+            </button>
+        </div>
+    </section>
+
+    <!-- Tire Tubes Section -->
+    <section class="products-section tire-tubes" id="tire-tubes">
+        <h2 class="section-header">Tire Tubes</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/81BmsJrp-hL._AC_SL1500_.jpg" alt="Standard Tire Tubes">
+                <h3>Standard Tire Tubes</h3>
+                <p>"Reliable Performance for Everyday Use"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://tiimg.tistatic.com/fp/1/007/828/high-performance-long-durable-solid-strong-black-rubber-car-tyre-tubes-556.jpg" alt="Heavy-Duty Tire Tubes">
+                <h3>Heavy-Duty Tire Tubes</h3>
+                <p>"Extra Protection for Rough Roads"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://tiimg.tistatic.com/fp/1/007/828/high-performance-long-durable-solid-strong-black-rubber-car-tyre-tubes-556.jpg" alt="Performance Tire Tubes">
+                <h3>Performance Tire Tubes</h3>
+                <p>"Optimized for High-Speed Stability"</p>
+            </div>
+        </div>
+        <div class="inquire-container">
+            <button class="buy-btn" onclick="openWhatsApp('tire tubes')">
+                <i class="fab fa-whatsapp"></i> Inquire About Tire Tubes
+            </button>
+        </div>
+    </section>
+
+    <!-- Engine Oil Section -->
+    <section class="products-section engine-oil" id="engine-oil">
+        <h2 class="section-header">Engine Oil</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://www.8newsnow.com/wp-content/uploads/sites/59/2023/02/How-Often-To-Change-Synthetic-Oil-Getty-2.jpg?strip=1" alt="Synthetic Oil">
+                <h3>Full Synthetic</h3>
+                <p>"Maximum Engine Protection"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://media.noria.com/sites/Uploads/2019/1/22/e10767c9-fe86-4d75-a0e8-0bd61f202b80_high-mileage-oil-1200_extra_large.jpeg" alt="High Mileage Oil">
+                <h3>High Mileage</h3>
+                <p>"Specially Formulated for Older Engines"</p>
+            </div>
+            <div class="product-card">
+                <img src="https://www.foxwooddiesel.com/assets/uploads/images/blog/_blogHero/869/what-causes-high-oil-consumption-in-diesel-engine.webp" alt="Diesel Oil">
+                <h3>Diesel Engine Oil</h3>
+                <p>"Superior Protection for Diesel Engines"</p>
+            </div>
+        </div>
+        <div class="inquire-container">
+            <button class="buy-btn" onclick="openWhatsApp('engine oil')">
+                <i class="fab fa-whatsapp"></i> Inquire About Engine Oil
+            </button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Get in Touch</h2>
+        <div class="contact-info">
+            <p>Ready to upgrade your ride with quality auto parts? Contact us today!</p>
+            <p><i class="fas fa-phone"></i> +234 811 989 8342</p>
+            <p><i class="fas fa-map-marker-alt"></i> Ilorin, Kwara State , Nigeria</p>
+            <div class="social-links">
+                <a href="https://wa.me/2348100761001" target="_blank"><i class="fab fa-whatsapp"></i></a>
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Makky's AutoHub. All rights reserved. Drive safe with quality parts!</p>
+    </footer>
+
+    <script>
+        // Enhanced smooth scroll to sections
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            const offset = 80; // Adjust for fixed header
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // WhatsApp integration with product-specific messages
+        function openWhatsApp(productType) {
+            const phone = '2348100761001';
+            let message = `🚗 *Inquiry from Makky's AutoHub* 🚗\n\nHey there! 👋\nI'm interested in your `;
+            
+            if (productType === 'tires') {
+                message += `premium tires:\n- All-Season Pro\n- Trail Blazer\n- Speed King`;
+            } else if (productType === 'alloy rims') {
+                message += `alloy rims:\n- Sport Chrome\n- Off-Road Beast\n- Luxury Edition`;
+            } else if (productType === 'car accessories') {
+                message += `car accessories:\n- Luxury Seat Covers\n- Premium Dash Covers\n- Sport Steering Covers`;
+            } else if (productType === 'lug nuts') {
+                message += `lug nuts:\n- Premium Lug Nuts\n- Chrome Finish\n- Locking Lug Nuts`;
+            } else if (productType === 'tire tubes') {
+                message += `tire tubes:\n- Standard Tire Tubes\n- Heavy-Duty Tire Tubes\n- Performance Tire Tubes`;
+            } else if (productType === 'engine oil') {
+                message += `engine oil:\n- Full Synthetic\n- High Mileage\n- Diesel Engine Oil`;
+            }
+            
+            message += `\n\nCould you please share:\n✅ Prices\n✅ Availability\n✅ More Details\n\nLooking forward to your response! 🎯`;
+            
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Random tire animations in header
+        function createRandomTire() {
+            const tire = document.createElement('div');
+            tire.classList.add('tire-anim');
+            tire.style.top = `${Math.random() * 80 + 10}vh`;
+            tire.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            tire.style.opacity = Math.random() * 0.5 + 0.5;
+            tire.style.width = `${Math.random() * 50 + 100}px`;
+            tire.style.height = tire.style.width;
+            document.querySelector('header').appendChild(tire);
+            setTimeout(() => tire.remove(), 10000);
+        }
+
+        // Create initial tires
+        for (let i = 0; i < 3; i++) {
+            setTimeout(createRandomTire, i * 500);
+        }
+        setInterval(createRandomTire, 2000);
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    // Add special animation for product cards
+                    if (entry.target.classList.contains('product-card')) {
+                        entry.target.style.transition = `all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${entry.target.dataset.delay || '0s'}`;
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Animate product cards with staggered delays
+        document.querySelectorAll('.product-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.dataset.delay = `${(index % 3) * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Animate section headers
+        document.querySelectorAll('.section-header, .about-title').forEach(header => {
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-30px)';
+            header.style.transition = 'all 0.6s ease-out';
+            observer.observe(header);
+        });
+
+        // Animate about text
+        document.querySelectorAll('.about-text').forEach(text => {
+            text.style.opacity = '0';
+            text.style.transform = 'translateY(30px)';
+            text.style.transition = 'all 0.6s ease-out 0.3s';
+            observer.observe(text);
+        });
+    </script>
+</body>
+</html>
